@@ -57,7 +57,7 @@ router.put('/:id', auth, async (req, res) => {
   if (name) contactFields.name = name;
   if (email) contactFields.email = email;
   if (phone) contactFields.phone = phone;
-  if (type) contactFields.name = type;
+  if (type) contactFields.type = type;
 
   try {
     let contact = await Contact.findById(req.params.id);
