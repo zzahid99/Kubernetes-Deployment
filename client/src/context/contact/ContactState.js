@@ -22,13 +22,15 @@ const ContactState = (props) => {
     filtered: null,
     error: null,
   };
+  
 
   const [state, dispatch] = useReducer(contactReducer, initialState);
+  let url = 'http://'+ window.REACT_APP_BRAND
 
   // Get Contacts
   const getContacts = async () => {
     try {
-      const res = await axios.get('/api/contacts');
+      const res = await axios.get(url + '/api/contacts');
 
       dispatch({ type: GET_CONTACTS, payload: res.data });
     } catch (err) {
@@ -45,7 +47,7 @@ const ContactState = (props) => {
     };
 
     try {
-      const res = await axios.post('/api/contacts', contact, config);
+      const res = await axios.post(url + '/api/contacts', contact, config);
 
       dispatch({ type: ADD_CONTACT, payload: res.data });
     } catch (err) {
@@ -56,7 +58,7 @@ const ContactState = (props) => {
   // Delete Contact
   const deleteContact = async (id) => {
     try {
-      await axios.delete(`/api/contacts/${id}`);
+      await axios.delete(url + `/api/contacts/${id}`);
 
       dispatch({ type: DELETE_CONTACT, payload: id });
     } catch (err) {
@@ -73,7 +75,7 @@ const ContactState = (props) => {
     };
 
     try {
-      const res = await axios.put(`/api/contacts/${contact._id}`, contact, config);
+      const res = await axios.put(url + `/api/contacts/${contact._id}`, contact, config);
 
       dispatch({ type: UPDATE_CONTACT, payload: res.data });
     } catch (err) {

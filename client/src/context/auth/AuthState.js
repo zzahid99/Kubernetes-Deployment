@@ -24,14 +24,14 @@ const AuthState = (props) => {
   };
 
   const [state, dispatch] = useReducer(authReducer, initialState);
-
+  let url = 'http://'+ window.REACT_APP_BRAND;
   // Load User
   const loadUser = async () => {
     // @todo - load token into global headers
     setAuthToken(localStorage.token);
 
     try {
-      const res = await axios.get('/api/auth');
+      const res = await axios.get(url + '/api/auth');
 
       dispatch({ type: USER_LOADED, payload: res.data });
     } catch (err) {
@@ -41,14 +41,20 @@ const AuthState = (props) => {
 
   // Register User
   const register = async (formData) => {
+    debugger
     const config = {
       headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       },
     };
 
     try {
-      const res = await axios.post('/api/users', formData, config);
+      //console.log(process.env)
+      
+      debugger
+
+      const res = await axios.post(url+'/api/users', formData, config);
 
       dispatch({ type: REGISTER_SUCCESS, payload: res.data });
       loadUser();
@@ -66,7 +72,7 @@ const AuthState = (props) => {
     };
 
     try {
-      const res = await axios.post('/api/auth', formData, config);
+      const res = await axios.post(url + '/api/auth', formData, config);
 
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
       loadUser();
