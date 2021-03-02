@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contact-client-app-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: contact-client-app
+  template:
+    metadata:
+      labels:
+        app: contact-client-app
+    spec:
+      containers:
+      - image: contact-client-kubernetes-app:latest
+        name: container1
+        imagePullPolicy: IfNotPresent
+        env:
+            - name: "BRAND"
+              value: %%HOST%%
