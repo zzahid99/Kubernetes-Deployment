@@ -35,7 +35,7 @@ pipeline {
         stage('DeployToProduction') {
             steps {
                 withCredentials([file(credentialsId: 'kube-config-file', variable: 'FILE')]) {
-                  sh 'kubectl apply -f server-app-deploy.yaml --kubeconfig $FILE'
+                  sh 'kubectl apply -f server-app-deploy.yaml --validate=false --kubeconfig $FILE'
                 }
             }
         }
