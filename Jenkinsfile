@@ -34,11 +34,9 @@ pipeline {
         }
         stage('DeployToProduction') {
             steps {
-                {
                 withCredentials([file(credentialsId: 'kube-config-file', variable: 'FILE')]) {
                   sh 'kubectl apply -f . --kubeconfig $FILE'
                 }
-            }
         }
     }
 }
