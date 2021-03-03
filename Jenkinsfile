@@ -34,7 +34,10 @@ pipeline {
         }
         stage('DeployToProduction') {
             steps {
-                kubernetesDeploy configs: 'server-app-deploy.yaml', kubeConfig: [path: '/var/lib/jenkins/.kube/config'], kubeconfigId: 'kubernetes', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+                {
+                withCredentials([file(credentialsId: 'kube-config-file', variable: 'FILE')]) {
+                  sh 'kubectl apply -f . --kubeconfig $FILE'
+                }
             }
         }
     }
