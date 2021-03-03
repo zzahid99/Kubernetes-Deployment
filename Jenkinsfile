@@ -35,7 +35,6 @@ pipeline {
         stage('DeployToProduction') {
             steps {
                 sh 'kubectl apply -f .'
-                )
             }
         }
     }
