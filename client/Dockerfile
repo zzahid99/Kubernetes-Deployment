@@ -7,5 +7,5 @@ LABEL maintainer=Zamar-Zahid
 COPY --from=todo-app-build /client/build/ /usr/share/nginx/html
 ADD docker-entrypoint.sh /
 RUN chmod +x docker-entrypoint.sh
-RUN echo "~/docker-entrypoint.sh" >> .profile
+RUN echo "/docker-entrypoint.sh" >> /root/.profile
 EXPOSE 80
