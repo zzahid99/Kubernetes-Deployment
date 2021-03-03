@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         //be sure to replace "willbla" with your own Docker Hub username
-        DOCKER_IMAGE_NAME = "zzahid99/contact-backend-app"
+        DOCKER_IMAGE_NAME = "zzahid99/contact-server-kubernetes-app"
     }
     //stages {
         //stage('Build') {
