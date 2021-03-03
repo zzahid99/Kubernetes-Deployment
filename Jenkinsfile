@@ -33,7 +33,9 @@ pipeline {
             }
         }
         stage('DeployToProduction') {
-            kubernetesDeploy configs: 'mongodb-service.yaml persistent-vol-claim-server-app.yaml server-app-deploy.yaml mongodb-pod.yaml persistent-vol-server-app.yaml server-app-configs.yaml server-app-service.yaml', kubeConfig: [path: ''], kubeconfigId: 'kubernetes', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+            steps {
+                kubernetesDeploy configs: 'mongodb-service.yaml persistent-vol-claim-server-app.yaml server-app-deploy.yaml mongodb-pod.yaml persistent-vol-server-app.yaml server-app-configs.yaml server-app-service.yaml', kubeConfig: [path: ''], kubeconfigId: 'kubernetes', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+            }
         }
     }
 }
