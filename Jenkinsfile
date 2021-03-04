@@ -35,7 +35,9 @@ pipeline {
         stage('DeployToProduction') {
             steps {
                 withCredentials([file(credentialsId: 'kube-config-file', variable: 'FILE')]) {
-                  sh 'kubectl delete deployment contact-server-app-deploy && kubectl create -f server-app-deploy.yaml --validate=false --kubeconfig $FILE'
+                    sh 'kubectl delete deployment contact-server-app-deploy --kubeconfig $FILE'
+                    sh 'kubectl create -f server-app-deploy.yaml --validate=false --kubeconfig $FILE'
+                    sh 'kubectl get pod --kubeconfig $FILE'
                 }
             }
         }
