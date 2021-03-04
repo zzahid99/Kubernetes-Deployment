@@ -17,7 +17,7 @@ spec:
         name: container1
         ports:
         - containerPort: 5000
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         envFrom:
         - configMapRef:
             name: server-side-configs
