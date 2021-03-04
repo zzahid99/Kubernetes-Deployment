@@ -15,7 +15,7 @@ pipeline {
        stage('checkout') {
             steps {
                 dir('client') {
-                    sh 'ls'
+                    sh 'npm run build'
                 }
             }
         }
@@ -47,5 +47,16 @@ pipeline {
         //         }
         //     }
         // }
+        stage('DeployToProduction') {
+            steps {
+                dir('client') {
+                    withCredentials([file(credentialsId: 'kube-config-file', variable: 'FILE')]) {
+                        sh 'kubectl delete deployment contact-client-app-deploy --kubeconfig $FILE'
+                        sh 'sed -e "s|%%HOST%%|$(minikube service contact-backend-service --url)|g" client-app-deploy.yaml | kubectl apply -f - --validate=false --kubeconfig $FILE'
+                        sh 'kubectl get pod --kubeconfig $FILE'
+                    }
+                }
+            }
+        }
     }
 }
