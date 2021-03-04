@@ -19,7 +19,7 @@ pipeline {
                 }
             }
         }
-        stage('Build Docker Image') {
+        stage('Build and Push Docker Image') {
             steps {
                 dir('client') {
                     script {
@@ -30,19 +30,20 @@ pipeline {
                         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
+                        }
                     }
                 }
             }
         }
-        // stage('Push Docker Image') {
-        //     steps {
-        //         script {
-        //             docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-        //                 app.push("${env.BUILD_NUMBER}")
-        //                 app.push("latest")
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                        app.push("${env.BUILD_NUMBER}")
+                        app.push("latest")
+                    }
+                }
+            }
+        }
     }
 }
