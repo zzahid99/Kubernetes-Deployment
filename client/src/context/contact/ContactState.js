@@ -25,7 +25,7 @@ const ContactState = (props) => {
   
 
   const [state, dispatch] = useReducer(contactReducer, initialState);
-  let url = 'http://'+ window.REACT_APP_BRAND
+  let url = window.REACT_APP_BRAND
 
   // Get Contacts
   const getContacts = async () => {

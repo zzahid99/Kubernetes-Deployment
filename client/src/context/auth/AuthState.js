@@ -24,7 +24,7 @@ const AuthState = (props) => {
   };
 
   const [state, dispatch] = useReducer(authReducer, initialState);
-  let url = 'http://'+ window.REACT_APP_BRAND;
+  let url = window.REACT_APP_BRAND;
   // Load User
   const loadUser = async () => {
     // @todo - load token into global headers

@@ -13,9 +13,9 @@ spec:
         app: contact-client-app
     spec:
       containers:
-      - image: contact-client-kubernetes-app:latest
+      - image: zzahid99/contact-client-kubernetes-app:latest
         name: container1
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         env:
             - name: "BRAND"
               value: %%HOST%%
