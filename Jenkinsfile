@@ -27,23 +27,21 @@ pipeline {
                         app.inside {
                             sh 'echo Hello, World!'
                         }
+                    }
+                }
+            }
+        }
+        stage('Push Docker Image') {
+            steps {
+                dir('client') {
+                    script {
                         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                        app.push("${env.BUILD_NUMBER}")
-                        app.push("latest")
+                            app.push("${env.BUILD_NUMBER}")
+                            app.push("latest")
                         }
                     }
                 }
             }
         }
-        // stage('Push Docker Image') {
-        //     steps {
-        //         script {
-        //             docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-        //                 app.push("${env.BUILD_NUMBER}")
-        //                 app.push("latest")
-        //             }
-        //         }
-        //     }
-        // }
     }
 }
