@@ -42,8 +42,10 @@ pipeline {
             }
         }
         stage('checkout') {
-            dir('client') {
-                sh 'ls'
+            steps {
+                dir('client') {
+                    sh 'ls'
+                }
             }
         }
     }
