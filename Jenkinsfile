@@ -52,7 +52,7 @@ pipeline {
                 dir('client') {
                     withCredentials([file(credentialsId: 'kube-config-file', variable: 'FILE')]) {
                         //sh 'kubectl delete deployment contact-client-app-deploy --kubeconfig $FILE'
-                        sh 'sed -e "s|%%HOST%%|${host}|g" client-app-deploy.yaml --validate=false --kubeconfig $FILE'
+                        sh 'sed -e "s|%%HOST%%|${host}|g" client-app-deploy.yaml'
                         sh 'kubectl get pod --kubeconfig $FILE'
                     }
                 }
