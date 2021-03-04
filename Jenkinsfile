@@ -15,7 +15,7 @@ pipeline {
        stage('checkout') {
             steps {
                 dir('client') {
-                    sh 'npm run build'
+                    sh 'npm install && npm run build'
                 }
             }
         }
