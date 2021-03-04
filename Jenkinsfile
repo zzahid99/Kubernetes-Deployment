@@ -12,29 +12,29 @@ pipeline {
          //       archiveArtifacts artifacts: 'dist/trainSchedule.zip'
          //   }
        // }
-       stage('checkout') {
-            steps {
-                dir('client') {
-                    sh 'npm install && npm run build'
-                }
-            }
-        }
-        stage('Build and Push Docker Image') {
-            steps {
-                dir('client') {
-                    script {
-                        app = docker.build(DOCKER_IMAGE_NAME)
-                        // app.inside {
-                        //     sh 'echo Hello, World!'
-                        // }
-                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                            app.push("${env.BUILD_NUMBER}")
-                            app.push("latest")
-                        }
-                    }
-                }
-            }
-        }
+    //    stage('checkout') {
+    //         steps {
+    //             dir('client') {
+    //                 sh 'npm install && npm run build'
+    //             }
+    //         }
+    //     }
+    //     stage('Build and Push Docker Image') {
+    //         steps {
+    //             dir('client') {
+    //                 script {
+    //                     app = docker.build(DOCKER_IMAGE_NAME)
+    //                     // app.inside {
+    //                     //     sh 'echo Hello, World!'
+    //                     // }
+    //                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+    //                         app.push("${env.BUILD_NUMBER}")
+    //                         app.push("latest")
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
         // stage('Push Docker Image') {
         //     steps {
         //         dir('client') {
@@ -52,7 +52,7 @@ pipeline {
                 dir('client') {
                     withCredentials([file(credentialsId: 'kube-config-file', variable: 'FILE')]) {
                         sh 'kubectl delete deployment contact-client-app-deploy --kubeconfig $FILE'
-                        sh './apply.sh --validate=false --kubeconfig $FILE'
+                        sh 'sed -e "s|%%HOST%%|${host}|g" --validate=false --kubeconfig $FILE'
                         sh 'kubectl get pod --kubeconfig $FILE'
                     }
                 }
