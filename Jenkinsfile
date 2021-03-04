@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         //be sure to replace "willbla" with your own Docker Hub username
-        DOCKER_IMAGE_NAME = "zzahid99/contact-server-kubernetes-app"
+        DOCKER_IMAGE_NAME = "zzahid99/contact-client-kubernetes-app"
     }
     stages {
         //stage('Build') {
@@ -12,6 +12,13 @@ pipeline {
          //       archiveArtifacts artifacts: 'dist/trainSchedule.zip'
          //   }
        // }
+       stage('checkout') {
+            steps {
+                dir('client') {
+                    sh 'ls'
+                }
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 script {
@@ -29,22 +36,6 @@ pipeline {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
-                }
-            }
-        }
-        stage('DeployToProduction') {
-            steps {
-                withCredentials([file(credentialsId: 'kube-config-file', variable: 'FILE')]) {
-                    sh 'kubectl delete deployment contact-server-app-deploy --kubeconfig $FILE'
-                    sh 'kubectl create -f server-app-deploy.yaml --validate=false --kubeconfig $FILE'
-                    sh 'kubectl get pod --kubeconfig $FILE'
-                }
-            }
-        }
-        stage('checkout') {
-            steps {
-                dir('client') {
-                    sh 'ls'
                 }
             }
         }
