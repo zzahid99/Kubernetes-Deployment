@@ -13,7 +13,7 @@ spec:
         app: contact-server-app
     spec:
       containers:
-      - image: zzahid99/contact-server-kubernetes-app:latest
+      - image: http://192.168.49.2:32000/repository/docker-private-repo/zzahid99/contact-server-kubernetes-app:latest
         name: container1
         ports:
         - containerPort: 5000
