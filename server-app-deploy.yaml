@@ -13,11 +13,13 @@ spec:
         app: contact-server-app
     spec:
       containers:
-      - image: http://192.168.49.2:30728/zzahid99/contact-server-kubernetes-app:latest
+      - image: 192.168.49.2:30728/zzahid99/contact-server-kubernetes-app:latest
         name: container1
         ports:
         - containerPort: 5000
         imagePullPolicy: Always
+        imagePullSecrets:
+        - name: regsecret
         envFrom:
         - configMapRef:
             name: server-side-configs
