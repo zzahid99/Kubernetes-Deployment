@@ -4,7 +4,7 @@ pipeline {
         //be sure to replace "willbla" with your own Docker Hub username
         registryCredentials = "nexus"
         registry = "192.168.49.2:30728/"
-        DOCKER_IMAGE_NAME_BACK_END = "contact-server-kubernetes-app"
+        DOCKER_IMAGE_NAME_BACK_END = "zzahid99/contact-server-kubernetes-app"
         DOCKER_IMAGE_NAME_FRONT_END = "zzahid99/contact-client-kubernetes-app"
     }
     stages {
