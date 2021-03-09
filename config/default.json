@@ -1,4 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://Zamar123:Zamar123@contactkeeper-lhdgh.mongodb.net/<dbname>?retryWrites=true&w=majority",
+  "mongoURI": "mongodb://contact-mongo-service:27017/contact-k8s",
   "jwtSecret": "secret"
 }
