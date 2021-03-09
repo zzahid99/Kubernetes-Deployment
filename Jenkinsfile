@@ -35,7 +35,7 @@ pipeline {
                 }
             }
         }
-       Front-End 
+       //Front-End 
        stage('checkout') {
             steps {
                 dir('client') {
