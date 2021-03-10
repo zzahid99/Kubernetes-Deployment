@@ -20,4 +20,4 @@ spec:
     - containerPort: 27017
     volumeMounts:
     - name: contact-mongo-vol
-      mountPath: /data/db
+      mountPath: /data/db/uat

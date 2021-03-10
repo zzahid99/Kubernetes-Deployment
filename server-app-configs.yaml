@@ -4,5 +4,5 @@ metadata:
   name: server-side-configs
 data:
   PORT: "5000"
-  CLIENT: http://192.168.49.2:31816
+  CLIENT: http://192.168.49.2:32638
   MONGODB_URL: mongodb://contact-mongo-service:27017/contact-k8s
