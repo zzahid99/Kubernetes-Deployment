@@ -6,7 +6,7 @@ pipeline {
         registry = "192.168.49.2:30728/"
         DOCKER_IMAGE_NAME_BACK_END = "zzahid99/contact-server-kubernetes-app"
         DOCKER_IMAGE_NAME_FRONT_END = "zzahid99/contact-client-kubernetes-app"
-        secretFile = "${env.BRANCH_NAME == 'dev' ? 'kube-config-file-dev' : env.BRANCH_NAME == 'qa' ? 'kube-config-file-qa' : env.BRANCH_NAME == 'uat' ? 'kube-config-file-uat'}"
+        secretFile = "${env.BRANCH_NAME == 'dev' ? 'kube-config-file-dev' : env.BRANCH_NAME == 'qa' ? 'kube-config-file-qa' : env.BRANCH_NAME == 'uat' ? 'kube-config-file-uat' : ''}"
     }
     stages {
         // Back-End
