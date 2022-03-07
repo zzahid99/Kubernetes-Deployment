@@ -2,11 +2,12 @@ pipeline {
     agent any
     environment {
         //be sure to replace "willbla" with your own Docker Hub username
-        registryCredentials = "nexus"
-        registry = "192.168.49.2:30728/"
+        registryCredentials = "dockerhub"
+        registry = "https://registry.hub.docker.com"
         DOCKER_IMAGE_NAME_BACK_END = "zzahid99/contact-server-kubernetes-app"
         DOCKER_IMAGE_NAME_FRONT_END = "zzahid99/contact-client-kubernetes-app"
-        secretFile = "${env.BRANCH_NAME == 'dev' ? 'kube-config-file-dev' : env.BRANCH_NAME == 'qa' ? 'kube-config-file-qa' : env.BRANCH_NAME == 'uat' ? 'kube-config-file-uat'}"
+        //secretFile = "${env.BRANCH_NAME == 'dev' ? 'kube-config-file-dev' : env.BRANCH_NAME == 'qa' ? 'kube-config-file-qa' : env.BRANCH_NAME == 'uat' ? 'kube-config-file-uat'}"
+        secretFile = 'kube-config-file'
     }
     stages {
         // Back-End
@@ -17,7 +18,7 @@ pipeline {
                     app.inside {
                         sh 'echo Hello, World!'
                     }
-                    docker.withRegistry('http://'+registry, registryCredentials) {
+                    docker.withRegistry(registry, registryCredentials) {
                         ///app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
