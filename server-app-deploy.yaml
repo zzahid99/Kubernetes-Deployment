@@ -13,7 +13,7 @@ spec:
         app: contact-server-app
     spec:
       containers:
-        - image: 192.168.49.2:30728/zzahid99/contact-server-kubernetes-app:latest
+        - image: zzahid99/contact-server-kubernetes-app:latest
           name: container1
           ports:
             - containerPort: 5000
@@ -23,5 +23,3 @@ spec:
                 name: server-side-configs
             - secretRef:
                 name: server-side-secrets
-      imagePullSecrets:
-          - name: regcred

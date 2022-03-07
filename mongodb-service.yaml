@@ -1,12 +1,12 @@
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
   labels:
     app: contact-mongodb
   name: contact-mongo-service
 spec:
-  ports:
-    - port: 27017
-      targetPort: 27017
   selector:
     app: contact-mongodb
+  ports:
+    - protocol: TCP
+      port: 27017

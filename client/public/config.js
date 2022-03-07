@@ -1,1 +1,1 @@
-window.REACT_APP_BRAND="testurl";
+window.REACT_APP_BRAND = "testurl";
