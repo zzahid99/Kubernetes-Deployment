@@ -3,7 +3,7 @@ pipeline {
     environment {
         //be sure to replace "willbla" with your own Docker Hub username
         registryCredentials = "dockerhub"
-        registry = "https://hub.docker.com/"
+        registry = "https://registry.hub.docker.com"
         DOCKER_IMAGE_NAME_BACK_END = "zzahid99/contact-server-kubernetes-app"
         DOCKER_IMAGE_NAME_FRONT_END = "zzahid99/contact-client-kubernetes-app"
         //secretFile = "${env.BRANCH_NAME == 'dev' ? 'kube-config-file-dev' : env.BRANCH_NAME == 'qa' ? 'kube-config-file-qa' : env.BRANCH_NAME == 'uat' ? 'kube-config-file-uat'}"
