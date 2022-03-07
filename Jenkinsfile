@@ -18,7 +18,7 @@ pipeline {
                     app.inside {
                         sh 'echo Hello, World!'
                     }
-                    docker.withRegistry(registry, registryCredentials) {
+                    docker.withRegistry('https://registry.hub.docker.com', registryCredentials) {
                         //app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
