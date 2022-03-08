@@ -25,18 +25,18 @@ pipeline {
                 }
             }
         }
-        // stage('Deploy') {
-        //     steps {
-        //         withCredentials([file(credentialsId: secretFile, variable: 'FILE')]) {
-        //             // sh 'kubectl config get-contexts --kubeconfig $FILE'
-        //             // //sh 'kubectl config use-context minikube --kubeconfig $FILE'
-        //             // sh 'kubectl config current-context --kubeconfig $FILE'
-        //             //sh 'kubectl delete deployment contact-server-app-deploy --kubeconfig $FILE'
-        //             sh 'kubectl create -f server-app-deploy.yaml --validate=false --kubeconfig $FILE'
-        //             sh 'kubectl get pod --kubeconfig $FILE'
-        //         }
-        //     }
-        // }
+        stage('Deploy') {
+            steps {
+                withCredentials([file(credentialsId: secretFile, variable: 'FILE')]) {
+                    // sh 'kubectl config get-contexts --kubeconfig $FILE'
+                    // //sh 'kubectl config use-context minikube --kubeconfig $FILE'
+                    // sh 'kubectl config current-context --kubeconfig $FILE'
+                    sh 'kubectl delete deployment contact-server-app-deploy --kubeconfig $FILE'
+                    sh 'kubectl create -f server-app-deploy.yaml --validate=false --kubeconfig $FILE'
+                    sh 'kubectl get pod --kubeconfig $FILE'
+                }
+            }
+        }
        //Front-End 
     //    stage('checkout') {
     //         steps {
