@@ -39,13 +39,13 @@ pipeline {
             }
         }
        //Front-End 
-       stage('checkout') {
-            steps {
-                dir('client') {
-                    sh 'npm install && npm run build'
-                }
-            }
-        }
+    //    stage('checkout') {
+    //         steps {
+    //             dir('client') {
+    //                 sh 'npm install && npm run build'
+    //             }
+    //         }
+    //     }
         stage('Build and Push Docker Image Front-End') {
             steps {
                 dir('client') {
