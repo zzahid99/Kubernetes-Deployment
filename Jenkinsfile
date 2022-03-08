@@ -11,20 +11,20 @@ pipeline {
     }
     stages {
         // Back-End
-       stage('Build and Push Docker Image Back-End') {
-            steps {
-                script {
-                    app = docker.build(DOCKER_IMAGE_NAME_BACK_END)
-                    app.inside {
-                        sh 'echo Hello, World!'
-                    }
-                    docker.withRegistry('https://registry.hub.docker.com', registryCredentials) {
-                        //app.push("${env.BUILD_NUMBER}")
-                        app.push("latest")
-                    }
-                }
-            }
-        }
+    //    stage('Build and Push Docker Image Back-End') {
+    //         steps {
+    //             script {
+    //                 app = docker.build(DOCKER_IMAGE_NAME_BACK_END)
+    //                 app.inside {
+    //                     sh 'echo Hello, World!'
+    //                 }
+    //                 docker.withRegistry('https://registry.hub.docker.com', registryCredentials) {
+    //                     //app.push("${env.BUILD_NUMBER}")
+    //                     app.push("latest")
+    //                 }
+    //             }
+    //         }
+    //     }
         stage('Deploy') {
             steps {
                 withCredentials([file(credentialsId: secretFile, variable: 'FILE')]) {
